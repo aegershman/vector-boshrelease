@@ -18,23 +18,22 @@ provider "aws" {
 # blobstore bucket
 ####################################
 
-resource "aws_s3_bucket" "yugabyte" {
-  bucket = "yugabyte-boshrelease"
+resource "aws_s3_bucket" "vector" {
+  bucket = "vector-boshrelease"
   acl    = "private"
 
   tags = {
-    name = "yugabyte-boshrelease"
-    pun  = "yugabucket"
+    name = "vector-boshrelease"
   }
 }
 
-data "aws_iam_policy_document" "yugabyte_bucket_public_read" {
+data "aws_iam_policy_document" "vector_bucket_public_read" {
   statement {
     actions = [
       "s3:GetObject"
     ]
     resources = [
-      "${aws_s3_bucket.yugabyte.arn}/*"
+      "${aws_s3_bucket.vector.arn}/*"
     ]
     principals {
       type        = "AWS"
@@ -43,59 +42,58 @@ data "aws_iam_policy_document" "yugabyte_bucket_public_read" {
   }
 }
 
-resource "aws_s3_bucket_policy" "yugabyte" {
-  bucket = "${aws_s3_bucket.yugabyte.id}"
-  policy = "${data.aws_iam_policy_document.yugabyte_bucket_public_read.json}"
+resource "aws_s3_bucket_policy" "vector" {
+  bucket = "${aws_s3_bucket.vector.id}"
+  policy = "${data.aws_iam_policy_document.vector_bucket_public_read.json}"
 }
 
 ####################################
 # service account for writing to the blobstore
 ####################################
 
-resource "aws_iam_user" "yugabyte" {
-  name = "yugabyte"
+resource "aws_iam_user" "vector" {
+  name = "vector"
 
   tags = {
-    name = "yugabyte-boshrelease"
-    pun  = "yugabot"
+    name = "vector-boshrelease"
   }
 }
 
-data "aws_iam_policy_document" "yugabyte_blobstore_write" {
+data "aws_iam_policy_document" "vector_blobstore_write" {
   statement {
     actions = [
       "s3:PutObject"
     ]
     resources = [
-      "${aws_s3_bucket.yugabyte.arn}/*"
+      "${aws_s3_bucket.vector.arn}/*"
     ]
   }
 }
 
-resource "aws_iam_policy" "yugabyte_blobstore_write" {
-  name        = "yugabyte-blobstore-write"
-  description = "yugabyte-boshrelease blobstore bucket write permission"
-  policy      = "${data.aws_iam_policy_document.yugabyte_blobstore_write.json}"
+resource "aws_iam_policy" "vector_blobstore_write" {
+  name        = "vector-blobstore-write"
+  description = "vector-boshrelease blobstore bucket write permission"
+  policy      = "${data.aws_iam_policy_document.vector_blobstore_write.json}"
 }
 
-resource "aws_iam_user_policy_attachment" "yugabyte" {
-  user       = "${aws_iam_user.yugabyte.name}"
-  policy_arn = "${aws_iam_policy.yugabyte_blobstore_write.arn}"
+resource "aws_iam_user_policy_attachment" "vector" {
+  user       = "${aws_iam_user.vector.name}"
+  policy_arn = "${aws_iam_policy.vector_blobstore_write.arn}"
 }
 
 ####################################
 # access key for that service account
 ####################################
 
-resource "aws_iam_access_key" "yugabyte" {
-  user    = "${aws_iam_user.yugabyte.name}"
+resource "aws_iam_access_key" "vector" {
+  user    = "${aws_iam_user.vector.name}"
   pgp_key = "keybase:aegershman"
 }
 
-output "yugabyte_access_key_id" {
-  value = "${aws_iam_access_key.yugabyte.id}"
+output "vector_access_key_id" {
+  value = "${aws_iam_access_key.vector.id}"
 }
 
-output "yugabyte_secret_access_key" {
-  value = "${aws_iam_access_key.yugabyte.encrypted_secret}"
+output "vector_secret_access_key" {
+  value = "${aws_iam_access_key.vector.encrypted_secret}"
 }
