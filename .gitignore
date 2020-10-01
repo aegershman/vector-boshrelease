@@ -1,3 +1,10 @@
+# macOS
+.DS_Store
+
+# storage for upstream blobs during local development
+_vendir/
+
+# bosh
 config/private.yml
 blobs
 dev_releases

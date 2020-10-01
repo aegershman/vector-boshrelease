@@ -1,0 +1,14 @@
+---
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.8.0
+directories:
+  - path: _vendir
+    contents:
+      - path: .
+        githubRelease:
+          slug: timberio/vector
+          tag: v0.10.0
+          disableAutoChecksumValidation: true
+        includePaths:
+          - vector-x86_64-unknown-linux-musl.tar.gz

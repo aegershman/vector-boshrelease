@@ -10,6 +10,7 @@ tasks:
     cmds:
       - echo "" >config/blobs.yml # resets the blobs file to purge any old blob definitions
       - task: dl-vector
+      - bosh add-blob _vendir/vector-x86_64-unknown-linux-musl.tar.gz vector/vector.tar.gz
 
   deploy-standalone: |
     bosh -d vector-standalone deploy manifests/vector-standalone/vector-standalone.yml \
