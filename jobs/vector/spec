@@ -1,0 +1,47 @@
+---
+name: vector
+
+templates:
+  config/bpm.erb.yml: config/bpm.yml
+  config/vector.toml.erb: config/vector.toml
+
+packages:
+  - vector
+
+properties:
+  bpm.limits.memory:
+    description: The memory limit to apply to this process. It is formatted as a number and then a single character for units e.g. 1G, 256M.
+    default: 512M
+  bpm.limits.open_files:
+    default: 1024
+  bpm.limits.processes:
+    default: 1024
+
+  vector_toml:
+    description: TOML content of user-supplied vector configuration.
+    example: |
+      [sources.var_vcap_sys_log]
+        type = "file"
+        ignore_older = 300
+        include = ["/var/vcap/sys/log/**/*.log"]
+        start_at_beginning = false
+      [sources.syslog_forwarder_input_on_localhost]
+        type = "syslog"
+        address = "0.0.0.0:5514"
+        mode = "tcp"
+      [transforms.add_aws_ec2_metadata]
+        type = "aws_ec2_metadata"
+        inputs = ["syslog_forwarder_input_on_localhost"]
+        fields = ["instance-id", "local-hostname", "local-ipv4", "public-hostname", "public-ipv4", "ami-id", "availability-zone", "vpc-id", "subnet-id", "region"]
+        host = "http://169.254.169.254"
+        namespace = ""
+        refresh_interval_secs = 10
+      [sinks.console_out]
+        type = "console"
+        inputs = ["add_aws_ec2_metadata"]
+        target = "stdout"
+        encoding = "text"
+      [sinks.blackhole]
+        type = "blackhole"
+        inputs = ["var_vcap_sys_log"]
+        print_amount = 1000
