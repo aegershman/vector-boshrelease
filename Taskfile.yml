@@ -1,0 +1,25 @@
+---
+version: "3"
+
+tasks:
+  dl-vector:
+    cmds:
+      - vendir sync
+
+  add-blobs:
+    cmds:
+      - echo "" >config/blobs.yml # resets the blobs file to purge any old blob definitions
+      - task: dl-vector
+
+  deploy-standalone: |
+    bosh -d vector-standalone deploy manifests/vector-standalone/vector-standalone.yml \
+      -o manifests/vector-standalone/operators/development/create-release-from-local.yml \
+      -l manifests/vector-standalone/vars.yml \
+      -l manifests/vector-standalone/operators/development/test-syslog-vars.yml \
+      --no-redact \
+      --non-interactive
+
+  test:
+    cmds:
+      # - task: add-blobs
+      - task: deploy-standalone
