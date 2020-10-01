@@ -3,6 +3,7 @@
 
 # storage for upstream blobs during local development
 _vendir/
+.vendir-tmp
 
 # bosh
 config/private.yml
