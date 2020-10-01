@@ -10,5 +10,5 @@ directories:
           slug: timberio/vector
           tag: v0.10.0
           disableAutoChecksumValidation: true
-        includePaths:
-          - vector-x86_64-unknown-linux-musl.tar.gz
+          unpackArchive:
+            path: vector-x86_64-unknown-linux-musl.tar.gz
