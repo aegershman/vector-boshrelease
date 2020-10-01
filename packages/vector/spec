@@ -1,0 +1,7 @@
+---
+name: vector
+
+dependencies: []
+
+files:
+  - vector/*/bin/vector
