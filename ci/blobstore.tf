@@ -4,7 +4,7 @@ terraform {
     organization = "aegershman"
 
     workspaces {
-      name = "vector-boshrelease"
+      name = "vector_boshrelease"
     }
   }
 }
@@ -18,22 +18,18 @@ provider "aws" {
 # blobstore bucket
 ####################################
 
-resource "aws_s3_bucket" "vector" {
-  bucket = "vector-boshrelease"
+resource "aws_s3_bucket" "vector_boshrelease" {
+  bucket = "vector_boshrelease"
   acl    = "private"
-
-  tags = {
-    name = "vector-boshrelease"
-  }
 }
 
-data "aws_iam_policy_document" "vector_bucket_public_read" {
+data "aws_iam_policy_document" "vector_boshrelease_blobstore_public_read" {
   statement {
     actions = [
       "s3:GetObject"
     ]
     resources = [
-      "${aws_s3_bucket.vector.arn}/*"
+      "${aws_s3_bucket.vector_boshrelease.arn}/*"
     ]
     principals {
       type        = "AWS"
@@ -42,58 +38,53 @@ data "aws_iam_policy_document" "vector_bucket_public_read" {
   }
 }
 
-resource "aws_s3_bucket_policy" "vector" {
-  bucket = "${aws_s3_bucket.vector.id}"
-  policy = "${data.aws_iam_policy_document.vector_bucket_public_read.json}"
+resource "aws_s3_bucket_policy" "vector_boshrelease" {
+  bucket = "${aws_s3_bucket.vector_boshrelease.id}"
+  policy = "${data.aws_iam_policy_document.vector_boshrelease_blobstore_public_read.json}"
 }
 
 ####################################
 # service account for writing to the blobstore
 ####################################
 
-resource "aws_iam_user" "vector" {
-  name = "vector"
-
-  tags = {
-    name = "vector-boshrelease"
-  }
+resource "aws_iam_user" "vector_boshrelease" {
+  name = "vector_boshrelease"
 }
 
-data "aws_iam_policy_document" "vector_blobstore_write" {
+data "aws_iam_policy_document" "vector_boshrelease_blobstore_write" {
   statement {
     actions = [
       "s3:PutObject"
     ]
     resources = [
-      "${aws_s3_bucket.vector.arn}/*"
+      "${aws_s3_bucket.vector_boshrelease.arn}/*"
     ]
   }
 }
 
-resource "aws_iam_policy" "vector_blobstore_write" {
-  name        = "vector-blobstore-write"
-  description = "vector-boshrelease blobstore bucket write permission"
-  policy      = "${data.aws_iam_policy_document.vector_blobstore_write.json}"
+resource "aws_iam_policy" "vector_boshrelease_blobstore_write" {
+  name   = "vector_boshrelease_blobstore_write"
+  policy = "${data.aws_iam_policy_document.vector_boshrelease_blobstore_write.json}"
 }
 
-resource "aws_iam_user_policy_attachment" "vector" {
-  user       = "${aws_iam_user.vector.name}"
-  policy_arn = "${aws_iam_policy.vector_blobstore_write.arn}"
+resource "aws_iam_user_policy_attachment" "vector_boshrelease" {
+  user       = "${aws_iam_user.vector_boshrelease.name}"
+  policy_arn = "${aws_iam_policy.vector_boshrelease_blobstore_write.arn}"
 }
 
 ####################################
-# access key for that service account
+# access key for our service account
 ####################################
 
-resource "aws_iam_access_key" "vector" {
-  user    = "${aws_iam_user.vector.name}"
+resource "aws_iam_access_key" "vector_boshrelease" {
+  user    = "${aws_iam_user.vector_boshrelease.name}"
   pgp_key = "keybase:aegershman"
 }
 
-output "vector_access_key_id" {
-  value = "${aws_iam_access_key.vector.id}"
+output "vector_boshrelease_access_key_id" {
+  value = "${aws_iam_access_key.vector_boshrelease.id}"
 }
 
-output "vector_secret_access_key" {
-  value = "${aws_iam_access_key.vector.encrypted_secret}"
+output "vector_boshrelease_secret_access_key" {
+  value = "${aws_iam_access_key.vector_boshrelease.encrypted_secret}"
 }
