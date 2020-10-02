@@ -3,6 +3,6 @@ name: vector-boshrelease
 blobstore:
   provider: s3
   options:
-    bucket_name: vector-boshrelease
+    bucket_name: vector_boshrelease
     region: us-east-2
     host: s3.us-east-2.amazonaws.com
