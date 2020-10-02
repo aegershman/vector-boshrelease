@@ -2,5 +2,6 @@
 
 set -eux
 
-mv vector/vector ${BOSH_INSTALL_TARGET}/vector
+tar zxf vector/vector-*.tar.gz
+mv vector-*/bin/vector ${BOSH_INSTALL_TARGET}/vector
 chmod +x ${BOSH_INSTALL_TARGET}/vector

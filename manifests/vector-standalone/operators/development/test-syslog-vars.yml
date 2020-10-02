@@ -13,9 +13,8 @@ vector_toml: |
     namespace = "" # optional, default
     refresh_interval_secs = 10 # optional, default
 
-  # https://vector.dev/docs/reference/sinks/console/
-  [sinks.console_out]
-    type = "console"
+  # https://vector.dev/docs/reference/sinks/blackhole/
+  [sinks.blackhole]
+    type = "blackhole"
     inputs = ["add_aws_ec2_metadata"]
-    target = "stdout"
-    encoding = "text"
+    print_amount = 1000 # required
