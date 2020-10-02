@@ -1,0 +1,5 @@
+check process vector
+  with pidfile /var/vcap/sys/run/bpm/vector/vector.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start vector"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop vector"
+  group vcap

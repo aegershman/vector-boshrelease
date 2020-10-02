@@ -1,0 +1,62 @@
+---
+tags: {}
+
+name: ((deployment_name))
+
+releases:
+  - name: bpm
+    version: latest
+  - name: syslog
+    version: latest
+  - name: vector
+    version: latest
+
+addons:
+  - name: bpm
+    jobs:
+      - name: bpm
+        release: bpm
+  - name: syslog_forwarder
+    jobs:
+      - name: syslog_forwarder
+        release: syslog
+        properties:
+          syslog:
+            address: localhost
+            port: 5514
+            transport: tcp
+            tls_enabled: false
+          blackbox:
+            log_filename: true
+
+instance_groups:
+  - name: vector
+    azs: ((vector_azs))
+    instances: ((vector_instances))
+    vm_type: ((vector_vm_type))
+    stemcell: default
+    networks: [name: ((network))]
+    jobs:
+      - name: vector
+        release: vector
+        properties:
+          vector_toml: ((vector_toml))
+
+variables: []
+
+stemcells:
+  - alias: default
+    os: ubuntu-xenial
+    version: 621.latest
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  serial: false
+  canary_watch_time: 1000-5000
+  update_watch_time: 1000-5000
+
+features:
+  randomize_az_placement: true
+  use_dns_addresses: true
+  use_short_dns_addresses: true

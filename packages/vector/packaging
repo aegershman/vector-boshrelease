@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -eux
+
+mv vector/vector ${BOSH_INSTALL_TARGET}/vector
+chmod +x ${BOSH_INSTALL_TARGET}/vector
