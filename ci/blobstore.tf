@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  version = "~> 2.50"
+  version = "~> 3.8"
   region  = "us-east-2"
 }
 
