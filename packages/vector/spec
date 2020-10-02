@@ -4,4 +4,4 @@ name: vector
 dependencies: []
 
 files:
-  - vector/vector
+  - vector/vector-*.tar.gz
