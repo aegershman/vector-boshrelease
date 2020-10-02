@@ -19,7 +19,7 @@ provider "aws" {
 ####################################
 
 resource "aws_s3_bucket" "vector_boshrelease" {
-  bucket = "vector_boshrelease"
+  bucket = "vector-boshrelease"
   acl    = "private"
 }
 
