@@ -1,0 +1,27 @@
+# this assumes all the relevant releases have already been
+# uploaded into the bosh director, and will use the "latest" version
+# of the uploaded release that's available on the director
+---
+- type: remove
+  path: /releases/name=vector-boshrelease/url?
+- type: remove
+  path: /releases/name=vector-boshrelease/sha1?
+- type: replace
+  path: /releases/name=vector-boshrelease/version?
+  value: latest
+
+- type: remove
+  path: /releases/name=bpm/url?
+- type: remove
+  path: /releases/name=bpm/sha1?
+- type: replace
+  path: /releases/name=bpm/version?
+  value: latest
+
+- type: remove
+  path: /releases/name=syslog?/url?
+- type: remove
+  path: /releases/name=syslog?/sha1?
+- type: replace
+  path: /releases/name=syslog/version?
+  value: latest

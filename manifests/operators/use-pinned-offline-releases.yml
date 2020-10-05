@@ -1,0 +1,22 @@
+# this assumes all the relevant releases have already been
+# uploaded into the bosh director, and will still assume a "pinned"
+# version of the releases will be provided.
+#
+# but it assumes those versions are already uploaded into the director.
+# this is useful in the event of desiring to keep the version controlled
+# or move the version back.
+---
+- type: remove
+  path: /releases/name=vector-boshrelease/url?
+- type: remove
+  path: /releases/name=vector-boshrelease/sha1?
+
+- type: remove
+  path: /releases/name=bpm/url?
+- type: remove
+  path: /releases/name=bpm/sha1?
+
+- type: remove
+  path: /releases/name=syslog?/url?
+- type: remove
+  path: /releases/name=syslog?/sha1?
