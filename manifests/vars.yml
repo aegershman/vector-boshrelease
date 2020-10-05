@@ -1,0 +1,6 @@
+---
+deployment_name: vector-standalone
+network: services-network
+vector_azs: [us-west-2a, us-west-2b, us-west-2c]
+vector_instances: 1
+vector_vm_type: t3.medium

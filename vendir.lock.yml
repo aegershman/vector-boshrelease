@@ -4,5 +4,5 @@ directories:
   - githubRelease:
       url: https://api.github.com/repos/timberio/vector/releases/28880199
     path: .
-  path: _vendir
+  path: src/vector
 kind: LockConfig

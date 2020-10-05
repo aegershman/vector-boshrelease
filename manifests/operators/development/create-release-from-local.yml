@@ -1,0 +1,8 @@
+# used for development purposes
+---
+- type: replace
+  path: /releases/name=vector-boshrelease
+  value:
+    name: vector-boshrelease
+    url: .
+    version: create

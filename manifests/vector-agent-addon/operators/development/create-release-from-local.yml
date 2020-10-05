@@ -1,8 +1,0 @@
-# used for development purposes
----
-- type: replace
-  path: /releases/name=vector
-  value:
-    name: vector
-    url: .
-    version: create
