@@ -1,0 +1,21 @@
+name: vector-boshrelease
+version: 0.2.0
+commit_hash: 1828a26
+uncommitted_changes: false
+jobs:
+- name: vector
+  version: 2545203d3f0f549dcd9ae6c859eb20110abbb346149b3ae30e75bc71293ba6a0
+  fingerprint: 2545203d3f0f549dcd9ae6c859eb20110abbb346149b3ae30e75bc71293ba6a0
+  sha1: sha256:d2fa6a913cb0b9c1ecc5348aa38dd23650430c158a86523130bf192e3ab7e167
+  packages:
+  - vector
+packages:
+- name: vector
+  version: 67f7822e885854c4ebf27b9063c19f48cd687379fdcbbec41c98d133f6313ec9
+  fingerprint: 67f7822e885854c4ebf27b9063c19f48cd687379fdcbbec41c98d133f6313ec9
+  sha1: sha256:031e43ba557568afc67f5ef81625b3223aafbb15d2ff2e29b3c2b7ffbc57d7d7
+  dependencies: []
+license:
+  version: c2065aa1a9f4fb07a011a13c07b02217354d0903c6a8b31f659d3733e7e67abd
+  fingerprint: c2065aa1a9f4fb07a011a13c07b02217354d0903c6a8b31f659d3733e7e67abd
+  sha1: sha256:71e18944f019b5de451bcd31725840b2a13adfccb4bcd69f4ff778e1e70dfb3a
