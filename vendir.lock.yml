@@ -2,7 +2,7 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - githubRelease:
-      url: https://api.github.com/repos/timberio/vector/releases/34668611
+      url: https://api.github.com/repos/timberio/vector/releases/35432170
     path: .
   path: src/vector
 kind: LockConfig
