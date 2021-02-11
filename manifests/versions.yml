@@ -3,5 +3,5 @@ bpm_sha1: dcf0582d838a73de29da273552ae79ac3098ee8b
 bpm_version: 1.1.9
 syslog_release_sha1: c956394fce7e74f741e4ae8c256b480904ad5942
 syslog_release_version: 11.6.1
-vector_boshrelease_sha1: f6188128449a1e9256daf931cc09db62cbb81569
-vector_boshrelease_version: 0.2.1
+vector_boshrelease_sha1: a9fc9077e6b0c4dac1a13d6f6faedd835134ddb1
+vector_boshrelease_version: 0.2.2
