@@ -20,6 +20,8 @@ bosh -d vector-standalone deploy manifests/vector-standalone.yml \
 
 The primary binary in this repository is from upstream `timberio/vector`. It's retrieved using the [`k14s/vendir`](https://github.com/k14s/vendir) cli and `vendir.yml`. Just run `vendir sync` and it'll pull the vector binary from an upstream github release and move it into this repository locally.
 
+If you need to update the version of `vector`, update it in `vendir.yml`, then `vendir sync`; git add updates, commit it.
+
 It's a small binary, so instead of using a blobstore we're just going to bite the bullet and store it in plain `git` as a normal file.
 
 ## cutting releases

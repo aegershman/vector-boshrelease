@@ -9,7 +9,7 @@ directories:
         githubRelease:
           # https://github.com/timberio/vector
           slug: timberio/vector
-          tag: v0.12.0
+          tag: v0.12.1
           disableAutoChecksumValidation: true
         includePaths:
           - vector-*-x86_64-unknown-linux-musl.tar.gz
