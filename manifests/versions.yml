@@ -1,6 +1,6 @@
 ---
-bpm_sha1: dcf0582d838a73de29da273552ae79ac3098ee8b
-bpm_version: 1.1.9
+bpm_sha1: 502e9446fa34accaf122ad2b28b6ffa543d5bbca
+bpm_version: 1.1.12
 syslog_release_sha1: c956394fce7e74f741e4ae8c256b480904ad5942
 syslog_release_version: 11.6.1
 vector_boshrelease_sha1: d39197db5170febaf1bb8b064d2185a5b27d2686
