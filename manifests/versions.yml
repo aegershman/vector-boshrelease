@@ -1,7 +1,7 @@
 ---
 bpm_sha1: 502e9446fa34accaf122ad2b28b6ffa543d5bbca
 bpm_version: 1.1.12
-syslog_release_sha1: c956394fce7e74f741e4ae8c256b480904ad5942
-syslog_release_version: 11.6.1
+syslog_release_sha1: 9bf48ad25843e29dc76437fe89a35c550746fd22
+syslog_release_version: 11.7.0
 vector_boshrelease_sha1: 3d877eb9b7a0f3f2d67ece006d7daf915e38588f
 vector_boshrelease_version: 0.5.0
